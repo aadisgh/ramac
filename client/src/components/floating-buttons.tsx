@@ -21,11 +21,11 @@ export default function FloatingButtons() {
 
   return (
     <>
-      {/* WhatsApp Floating Button */}
+      {/* Enhanced WhatsApp Floating Button */}
       <div className="fixed bottom-6 right-6 z-50">
         <Button
           asChild
-          className="w-16 h-16 bg-success rounded-full flex items-center justify-center text-white text-2xl hover:bg-success/90 transition-colors shadow-lg hover:shadow-xl animate-pulse border-0"
+          className="w-16 h-16 bg-success rounded-full flex items-center justify-center text-white text-2xl hover:bg-success/90 transition-all duration-300 shadow-xl hover:shadow-2xl animate-pulse hover-lift border-0"
         >
           <a 
             href="https://wa.me/919876543210" 
@@ -36,6 +36,11 @@ export default function FloatingButtons() {
             <FaWhatsapp size={32} />
           </a>
         </Button>
+        {/* WhatsApp tooltip */}
+        <div className="absolute bottom-20 right-0 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+          Chat with us on WhatsApp
+          <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
+        </div>
       </div>
 
       {/* Scroll to Top Button */}

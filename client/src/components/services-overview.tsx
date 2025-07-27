@@ -35,7 +35,7 @@ export default function ServicesOverview() {
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-fade-in">
           <h2 className="font-poppins font-bold text-3xl md:text-4xl text-gray-800 mb-4">
             Why Choose Rama Coaching?
           </h2>
@@ -50,9 +50,10 @@ export default function ServicesOverview() {
             return (
               <div 
                 key={index}
-                className={`bg-gradient-to-br ${service.gradient} rounded-2xl p-8 text-center hover:shadow-lg transition-all duration-300`}
+                className={`bg-gradient-to-br ${service.gradient} rounded-2xl p-8 text-center hover:shadow-xl hover-lift transition-all duration-300 animate-slide-up`}
+                style={{animationDelay: `${index * 0.1}s`}}
               >
-                <div className={`w-16 h-16 ${service.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-6`}>
+                <div className={`w-16 h-16 ${service.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-6 hover-lift shadow-lg animate-bounce-in`}>
                   <IconComponent className="text-white text-2xl" size={32} />
                 </div>
                 <h3 className="font-poppins font-semibold text-xl mb-4">{service.title}</h3>

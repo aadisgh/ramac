@@ -15,16 +15,16 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50">
+    <nav className="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-blue-100">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
+          <div className="flex items-center space-x-3 animate-fade-in">
+            <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center hover-lift shadow-lg">
               <GraduationCap className="text-white text-xl" size={24} />
             </div>
             <div>
               <h1 className="font-poppins font-bold text-xl text-gray-800">Rama Coaching</h1>
-              <p className="text-xs text-gray-600">Excellence in Education</p>
+              <p className="text-xs text-gray-600">Excellence in Education Since 2013</p>
             </div>
           </div>
           
@@ -62,13 +62,13 @@ export default function Navigation() {
             </button>
           </div>
 
-          {/* CTA Button */}
+          {/* Enhanced CTA Button */}
           <div className="hidden md:block">
             <Button 
               onClick={() => scrollToSection('contact')}
-              className="bg-gradient-to-r from-secondary to-accent text-white px-6 py-2 rounded-lg font-medium hover:shadow-lg transition-all duration-300 border-0"
+              className="bg-gradient-to-r from-secondary to-accent text-white px-6 py-2 rounded-lg font-medium hover:shadow-lg hover-lift transition-all duration-300 border-0 animate-pulse-glow"
             >
-              Enroll Now
+              Join Now
             </Button>
           </div>
 

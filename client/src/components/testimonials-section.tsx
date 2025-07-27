@@ -46,10 +46,11 @@ export default function TestimonialsSection() {
             {testimonials.map((testimonial, index) => (
               <div 
                 key={testimonial.id}
-                className={`bg-gradient-to-br ${gradients[index % gradients.length]} rounded-2xl p-8 hover:shadow-lg transition-all duration-300`}
+                className={`bg-gradient-to-br ${gradients[index % gradients.length]} rounded-2xl p-8 hover:shadow-xl hover-lift transition-all duration-300 animate-slide-up`}
+                style={{animationDelay: `${index * 0.2}s`}}
               >
                 <div className="flex items-center mb-6">
-                  <div className={`w-12 h-12 bg-gradient-to-br ${iconGradients[index % iconGradients.length]} rounded-full flex items-center justify-center text-white font-bold text-lg`}>
+                  <div className={`w-14 h-14 bg-gradient-to-br ${iconGradients[index % iconGradients.length]} rounded-full flex items-center justify-center text-white font-bold text-lg hover-lift shadow-lg`}>
                     {getInitials(testimonial.parentName)}
                   </div>
                   <div className="ml-4">
@@ -59,10 +60,18 @@ export default function TestimonialsSection() {
                 </div>
                 <div className="flex mb-4">
                   {[...Array(parseInt(testimonial.rating))].map((_, starIndex) => (
-                    <Star key={starIndex} className="text-accent fill-current" size={16} />
+                    <Star 
+                      key={starIndex} 
+                      className="text-accent fill-current animate-bounce-in" 
+                      size={18}
+                      style={{animationDelay: `${(index * 0.2) + (starIndex * 0.1)}s`}}
+                    />
                   ))}
                 </div>
-                <p className="text-gray-700 italic">"{testimonial.feedback}"</p>
+                <p className="text-gray-700 italic leading-relaxed">"{testimonial.feedback}"</p>
+                
+                {/* Quote marks decoration */}
+                <div className="absolute top-4 right-4 text-6xl text-primary/10 font-serif">"</div>
               </div>
             ))}
           </div>

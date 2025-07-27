@@ -12,23 +12,24 @@ export default function ClassesSection() {
     },
     {
       icon: Book,
-      title: "Class 1 to 8",
-      description: "Strong academic foundation with all subjects covered by expert teachers.",
+      title: "Class 1st to 8th",
+      description: "Strong academic foundation with all subjects covered by experienced teachers.",
       features: ["All subjects covered", "Regular assessments", "Doubt clearing sessions"],
       gradient: "from-blue-50 to-cyan-50",
       iconGradient: "from-blue-500 to-cyan-500",
     },
     {
       icon: GraduationCap,
-      title: "Class 9 & 10",
-      description: "Board exam preparation with comprehensive study materials and mock tests.",
-      features: ["Board exam focus", "Mock tests", "Career guidance"],
+      title: "Class 9th & 10th",
+      description: "Complete board exam preparation with all subjects coverage and intensive practice.",
+      features: ["All subjects covered", "Board exam focus", "Mock tests", "Weekly assessments"],
       gradient: "from-green-50 to-teal-50",
       iconGradient: "from-green-500 to-teal-500",
+      featured: true,
     },
     {
       icon: Atom,
-      title: "Class 11 & 12",
+      title: "Class 11th & 12th",
       description: "Specialized coaching for Science and Arts streams with entrance exam preparation.",
       features: ["Science & Arts streams", "Entrance exam prep", "College counseling"],
       gradient: "from-orange-50 to-red-50",
@@ -72,18 +73,24 @@ export default function ClassesSection() {
             return (
               <div 
                 key={index}
-                className={`bg-gradient-to-br ${classItem.gradient} rounded-2xl p-8 hover:shadow-lg transition-all duration-300 ${
-                  classItem.featured ? 'border-2 border-accent' : ''
+                className={`bg-gradient-to-br ${classItem.gradient} rounded-2xl p-8 hover:shadow-xl hover-lift transition-all duration-300 animate-fade-in ${
+                  classItem.featured ? 'border-2 border-accent ring-2 ring-accent/20' : ''
                 }`}
+                style={{animationDelay: `${index * 0.1}s`}}
               >
-                <div className={`w-16 h-16 bg-gradient-to-br ${classItem.iconGradient} rounded-2xl flex items-center justify-center mb-6`}>
+                {classItem.featured && (
+                  <div className="absolute -top-3 left-4 bg-accent text-white px-3 py-1 rounded-full text-xs font-bold">
+                    HIGHLIGHTED
+                  </div>
+                )}
+                <div className={`w-16 h-16 bg-gradient-to-br ${classItem.iconGradient} rounded-2xl flex items-center justify-center mb-6 hover-lift shadow-lg`}>
                   <IconComponent className="text-white text-2xl" size={32} />
                 </div>
                 <h3 className="font-poppins font-semibold text-xl mb-4">{classItem.title}</h3>
                 <p className="text-gray-600 mb-4">{classItem.description}</p>
                 <ul className="text-sm text-gray-600 space-y-2">
                   {classItem.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center">
+                    <li key={featureIndex} className="flex items-center animate-slide-up" style={{animationDelay: `${(index * 0.1) + (featureIndex * 0.05)}s`}}>
                       <Check className="text-success mr-2" size={16} />
                       {feature}
                     </li>

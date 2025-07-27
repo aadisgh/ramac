@@ -73,15 +73,15 @@ export default function ContactSection() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16">
-          {/* Contact Info */}
-          <div>
+          {/* Enhanced Contact Info */}
+          <div className="animate-slide-up">
             <div className="mb-8">
               <h3 className="font-poppins font-semibold text-2xl mb-6">Visit Our Center</h3>
               
-              {/* Contact Cards */}
+              {/* Enhanced Contact Cards */}
               <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start space-x-4 p-4 bg-white rounded-xl shadow-lg hover-lift">
+                  <div className="w-12 h-12 bg-gradient-to-r from-primary to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 hover-lift shadow-md">
                     <MapPin className="text-white" size={20} />
                   </div>
                   <div>
@@ -93,29 +93,29 @@ export default function ContactSection() {
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start space-x-4 p-4 bg-white rounded-xl shadow-lg hover-lift">
+                  <div className="w-12 h-12 bg-gradient-to-r from-secondary to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0 hover-lift shadow-md">
                     <Phone className="text-white" size={20} />
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg mb-1">Phone Numbers</h4>
-                    <p className="text-gray-600">
-                      +91 98765 43210<br />
-                      +91 87654 32109
-                    </p>
+                    <div className="space-y-1">
+                      <a href="tel:+919876543210" className="block text-gray-600 hover:text-primary transition-colors">+91 98765 43210</a>
+                      <a href="tel:+918765432109" className="block text-gray-600 hover:text-primary transition-colors">+91 87654 32109</a>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-success rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start space-x-4 p-4 bg-white rounded-xl shadow-lg hover-lift">
+                  <div className="w-12 h-12 bg-gradient-to-r from-success to-green-600 rounded-xl flex items-center justify-center flex-shrink-0 hover-lift shadow-md">
                     <MessageCircle className="text-white" size={20} />
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg mb-1">WhatsApp</h4>
-                    <p className="text-gray-600 mb-2">+91 98765 43210</p>
+                    <p className="text-gray-600 mb-3">+91 98765 43210</p>
                     <Button 
                       asChild
-                      className="bg-success hover:bg-success/90 text-white text-sm border-0"
+                      className="bg-gradient-to-r from-success to-green-600 hover:shadow-lg hover-lift text-white text-sm border-0"
                     >
                       <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">
                         <MessageCircle className="mr-2" size={16} />
@@ -125,8 +125,8 @@ export default function ContactSection() {
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-accent rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start space-x-4 p-4 bg-white rounded-xl shadow-lg hover-lift">
+                  <div className="w-12 h-12 bg-gradient-to-r from-accent to-yellow-600 rounded-xl flex items-center justify-center flex-shrink-0 hover-lift shadow-md">
                     <Clock className="text-white" size={20} />
                   </div>
                   <div>
@@ -150,9 +150,9 @@ export default function ContactSection() {
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div>
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8">
+          {/* Enhanced Contact Form */}
+          <div className="animate-fade-in">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 shadow-xl hover-lift">
               <h3 className="font-poppins font-semibold text-2xl mb-6">Admission Inquiry Form</h3>
               
               <Form {...form}>
@@ -244,7 +244,7 @@ export default function ContactSection() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Preferred Batch Timing</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <Select onValueChange={field.onChange} defaultValue={field.value || ''}>
                           <FormControl>
                             <SelectTrigger>
                               <SelectValue placeholder="Select Timing" />
@@ -272,7 +272,8 @@ export default function ContactSection() {
                             placeholder="Any specific requirements or questions?" 
                             className="resize-none"
                             rows={4}
-                            {...field} 
+                            {...field}
+                            value={field.value || ''}
                           />
                         </FormControl>
                         <FormMessage />
@@ -282,7 +283,7 @@ export default function ContactSection() {
 
                   <Button 
                     type="submit" 
-                    className="w-full bg-gradient-to-r from-primary to-blue-600 text-white py-4 rounded-lg font-semibold text-lg hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 border-0 h-auto"
+                    className="w-full bg-gradient-to-r from-primary to-blue-600 text-white py-4 rounded-lg font-semibold text-lg hover:shadow-xl hover-lift hover-glow transition-all duration-300 border-0 h-auto animate-pulse-glow"
                     disabled={createInquiry.isPending}
                   >
                     <Send className="mr-2" size={20} />
