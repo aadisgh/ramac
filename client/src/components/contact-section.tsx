@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { MapPin, Phone, MessageCircle, Clock, Send } from "lucide-react";
+import { MapPin, Phone, MessageCircle, Clock, Send, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { insertInquirySchema } from "@shared/schema";
@@ -73,68 +73,84 @@ export default function ContactSection() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16">
-          {/* Enhanced Contact Info */}
+          {/* Contact Information */}
           <div className="animate-slide-up">
             <div className="mb-8">
-              <h3 className="font-poppins font-semibold text-2xl mb-6">Visit Our Center</h3>
+              <h3 className="font-poppins font-semibold text-2xl mb-6">Contact Information</h3>
               
-              {/* Enhanced Contact Cards */}
+              {/* Contact Info Cards */}
               <div className="space-y-6">
-                <div className="flex items-start space-x-4 p-4 bg-white rounded-xl shadow-lg hover-lift">
-                  <div className="w-12 h-12 bg-gradient-to-r from-primary to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 hover-lift shadow-md">
-                    <MapPin className="text-white" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-lg mb-1">Address</h4>
-                    <p className="text-gray-600">
-                      123 Education Street, Knowledge City<br />
-                      Near Government School, PIN: 123456
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4 p-4 bg-white rounded-xl shadow-lg hover-lift">
-                  <div className="w-12 h-12 bg-gradient-to-r from-secondary to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0 hover-lift shadow-md">
-                    <Phone className="text-white" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-lg mb-1">Phone Numbers</h4>
-                    <div className="space-y-1">
-                      <a href="tel:+919876543210" className="block text-gray-600 hover:text-primary transition-colors">+91 98765 43210</a>
-                      <a href="tel:+918765432109" className="block text-gray-600 hover:text-primary transition-colors">+91 87654 32109</a>
+                <div className="p-6 bg-gray-50 rounded-xl">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
+                      <MapPin className="text-blue-600" size={20} />
                     </div>
+                    <h4 className="font-semibold text-lg text-gray-800">Our Location</h4>
+                  </div>
+                  <div className="text-gray-600">
+                    <p className="font-medium">123 Education Street</p>
+                    <p>Academic Zone, City</p>
+                    <p>Pin Code: 123456</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4 p-4 bg-white rounded-xl shadow-lg hover-lift">
-                  <div className="w-12 h-12 bg-gradient-to-r from-success to-green-600 rounded-xl flex items-center justify-center flex-shrink-0 hover-lift shadow-md">
-                    <MessageCircle className="text-white" size={20} />
+                <div className="p-6 bg-gray-50 rounded-xl">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
+                      <Phone className="text-blue-600" size={20} />
+                    </div>
+                    <h4 className="font-semibold text-lg text-gray-800">Phone Numbers</h4>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-lg mb-1">WhatsApp</h4>
-                    <p className="text-gray-600 mb-3">+91 98765 43210</p>
-                    <Button 
-                      asChild
-                      className="bg-gradient-to-r from-success to-green-600 hover:shadow-lg hover-lift text-white text-sm border-0"
-                    >
-                      <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">
-                        <MessageCircle className="mr-2" size={16} />
-                        Chat Now
+                  <div className="text-gray-600 space-y-1">
+                    <p className="font-medium">+91 98765 43210</p>
+                    <p>+91 87654 32109</p>
+                    <p className="text-sm">Landline: 0123-456789</p>
+                  </div>
+                </div>
+
+                <div className="p-6 bg-gray-50 rounded-xl">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
+                      <Mail className="text-blue-600" size={20} />
+                    </div>
+                    <h4 className="font-semibold text-lg text-gray-800">Email Address</h4>
+                  </div>
+                  <div className="text-gray-600 space-y-1">
+                    <p className="font-medium">info@ramacoaching.com</p>
+                    <p>admission@ramacoaching.com</p>
+                  </div>
+                </div>
+
+                <div className="p-6 bg-gray-50 rounded-xl">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
+                      <Clock className="text-blue-600" size={20} />
+                    </div>
+                    <h4 className="font-semibold text-lg text-gray-800">Office Hours</h4>
+                  </div>
+                  <div className="text-gray-600 space-y-1">
+                    <p className="font-medium">Monday - Saturday</p>
+                    <p>8:00 AM - 7:00 PM</p>
+                    <p className="font-medium">Sunday: By Appointment</p>
+                  </div>
+                </div>
+                
+                {/* Quick Actions */}
+                <div className="mt-8">
+                  <h4 className="font-semibold text-lg text-gray-800 mb-4">Quick Actions</h4>
+                  <div className="grid grid-cols-2 gap-4">
+                    <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white">
+                      <a href="tel:+919876543210">
+                        <Phone className="mr-2" size={16} />
+                        Call Now
                       </a>
                     </Button>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4 p-4 bg-white rounded-xl shadow-lg hover-lift">
-                  <div className="w-12 h-12 bg-gradient-to-r from-accent to-yellow-600 rounded-xl flex items-center justify-center flex-shrink-0 hover-lift shadow-md">
-                    <Clock className="text-white" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-lg mb-1">Office Hours</h4>
-                    <p className="text-gray-600">
-                      Monday - Saturday: 8:00 AM - 8:00 PM<br />
-                      Sunday: 9:00 AM - 1:00 PM
-                    </p>
+                    <Button asChild className="bg-green-600 hover:bg-green-700 text-white">
+                      <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">
+                        <MessageCircle className="mr-2" size={16} />
+                        WhatsApp Chat
+                      </a>
+                    </Button>
                   </div>
                 </div>
               </div>

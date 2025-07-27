@@ -1,6 +1,25 @@
 import { Check, Baby, Book, GraduationCap, Atom, Trophy, Laptop } from "lucide-react";
 
 export default function ClassesSection() {
+  const getSubjectsForClass = (title: string) => {
+    switch (title) {
+      case "Nursery to UKG":
+        return ["English", "Hindi", "Math", "EVS", "Drawing"];
+      case "Class 1st to 8th":
+        return ["English", "Hindi", "Math", "Science", "Social Studies"];
+      case "Class 9th & 10th":
+        return ["Math", "Science", "English", "Hindi", "Social Studies"];
+      case "Class 11th & 12th":
+        return ["Physics", "Chemistry", "Biology", "Math", "Arts Subjects"];
+      case "Navodaya Entrance":
+        return ["Mental Ability", "Arithmetic", "Language Test"];
+      case "Computer Classes":
+        return ["Basic Computer", "MS Office", "Programming Basics", "Internet"];
+      default:
+        return [];
+    }
+  };
+
   const classes = [
     {
       icon: Baby,
@@ -73,32 +92,91 @@ export default function ClassesSection() {
             return (
               <div 
                 key={index}
-                className={`bg-gradient-to-br ${classItem.gradient} rounded-2xl p-8 hover:shadow-xl hover-lift transition-all duration-300 animate-fade-in ${
-                  classItem.featured ? 'border-2 border-accent ring-2 ring-accent/20' : ''
+                className={`bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover-lift transition-all duration-300 animate-fade-in border border-gray-100 ${
+                  classItem.featured ? 'border-2 border-primary ring-2 ring-primary/20' : ''
                 }`}
                 style={{animationDelay: `${index * 0.1}s`}}
               >
                 {classItem.featured && (
-                  <div className="absolute -top-3 left-4 bg-accent text-white px-3 py-1 rounded-full text-xs font-bold">
-                    HIGHLIGHTED
+                  <div className="absolute -top-3 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold">
+                    Featured
                   </div>
                 )}
-                <div className={`w-16 h-16 bg-gradient-to-br ${classItem.iconGradient} rounded-2xl flex items-center justify-center mb-6 hover-lift shadow-lg`}>
-                  <IconComponent className="text-white text-2xl" size={32} />
+                
+                <div className={`w-14 h-14 bg-gradient-to-br ${classItem.iconGradient} rounded-xl flex items-center justify-center mb-4 hover-lift shadow-md`}>
+                  <IconComponent className="text-white" size={24} />
                 </div>
-                <h3 className="font-poppins font-semibold text-xl mb-4">{classItem.title}</h3>
-                <p className="text-gray-600 mb-4">{classItem.description}</p>
-                <ul className="text-sm text-gray-600 space-y-2">
-                  {classItem.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center animate-slide-up" style={{animationDelay: `${(index * 0.1) + (featureIndex * 0.05)}s`}}>
-                      <Check className="text-success mr-2" size={16} />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+                
+                <h3 className="font-poppins font-bold text-lg mb-2 text-gray-800">{classItem.title}</h3>
+                <p className="text-gray-600 text-sm mb-4">{classItem.description}</p>
+                
+                <div className="mb-4">
+                  <h4 className="font-semibold text-gray-800 text-sm mb-2">Subjects Covered:</h4>
+                  <div className="flex flex-wrap gap-1">
+                    {getSubjectsForClass(classItem.title).map((subject) => (
+                      <span key={subject} className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">
+                        {subject}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="mb-6">
+                  <h4 className="font-semibold text-gray-800 text-sm mb-2">Key Features:</h4>
+                  <ul className="text-xs text-gray-600 space-y-1">
+                    {classItem.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center animate-slide-up" style={{animationDelay: `${(index * 0.1) + (featureIndex * 0.05)}s`}}>
+                        <Check className="text-green-500 mr-2" size={12} />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <button className="w-full bg-primary hover:bg-primary/90 text-white py-2 rounded-lg text-sm font-medium transition-all duration-300 hover-lift">
+                  Enroll Now
+                </button>
               </div>
             );
           })}
+        </div>
+
+        {/* What Makes Us Special Section */}
+        <div className="mt-16 bg-gradient-to-r from-primary/5 to-blue-50 rounded-2xl p-8">
+          <h3 className="font-poppins font-bold text-2xl text-center mb-8 text-gray-800">What Makes Us Special?</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white rounded-xl p-6 shadow-md hover-lift text-center">
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Book className="text-green-600" size={24} />
+              </div>
+              <h4 className="font-semibold text-gray-800 mb-2">Free Study Material</h4>
+              <p className="text-gray-600 text-sm">Complete study materials provided at no extra cost</p>
+            </div>
+            
+            <div className="bg-white rounded-xl p-6 shadow-md hover-lift text-center">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <GraduationCap className="text-blue-600" size={24} />
+              </div>
+              <h4 className="font-semibold text-gray-800 mb-2">Weekly Tests & Assessments</h4>
+              <p className="text-gray-600 text-sm">Regular evaluation to track student progress</p>
+            </div>
+            
+            <div className="bg-white rounded-xl p-6 shadow-md hover-lift text-center">
+              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Trophy className="text-purple-600" size={24} />
+              </div>
+              <h4 className="font-semibold text-gray-800 mb-2">Parent-Teacher Meetings</h4>
+              <p className="text-gray-600 text-sm">Regular communication with parents about progress</p>
+            </div>
+            
+            <div className="bg-white rounded-xl p-6 shadow-md hover-lift text-center">
+              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Baby className="text-orange-600" size={24} />
+              </div>
+              <h4 className="font-semibold text-gray-800 mb-2">Individual Attention</h4>
+              <p className="text-gray-600 text-sm">Personal attention to every student's needs</p>
+            </div>
+          </div>
         </div>
 
         {/* Batch Timings */}
