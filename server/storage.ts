@@ -8,9 +8,16 @@ import {
   type Notice,
   type InsertNotice,
   type GalleryItem,
-  type InsertGalleryItem
+  type InsertGalleryItem,
+  users,
+  inquiries,
+  testimonials,
+  notices,
+  galleryItems
 } from "@shared/schema";
 import { randomUUID } from "crypto";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -184,7 +191,9 @@ export class MemStorage implements IStorage {
     const inquiry: Inquiry = { 
       ...insertInquiry, 
       id, 
-      createdAt: new Date().toISOString() as any
+      message: insertInquiry.message || null,
+      timing: insertInquiry.timing || null,
+      createdAt: new Date()
     };
     this.inquiries.set(id, inquiry);
     return inquiry;
@@ -202,7 +211,12 @@ export class MemStorage implements IStorage {
 
   async createTestimonial(insertTestimonial: InsertTestimonial): Promise<Testimonial> {
     const id = randomUUID();
-    const testimonial: Testimonial = { ...insertTestimonial, id };
+    const testimonial: Testimonial = { 
+      ...insertTestimonial, 
+      id,
+      rating: insertTestimonial.rating || "5",
+      isVisible: insertTestimonial.isVisible ?? true
+    };
     this.testimonials.set(id, testimonial);
     return testimonial;
   }
@@ -213,7 +227,11 @@ export class MemStorage implements IStorage {
 
   async createNotice(insertNotice: InsertNotice): Promise<Notice> {
     const id = randomUUID();
-    const notice: Notice = { ...insertNotice, id };
+    const notice: Notice = { 
+      ...insertNotice, 
+      id,
+      isVisible: insertNotice.isVisible ?? true
+    };
     this.notices.set(id, notice);
     return notice;
   }
@@ -224,10 +242,92 @@ export class MemStorage implements IStorage {
 
   async createGalleryItem(insertGalleryItem: InsertGalleryItem): Promise<GalleryItem> {
     const id = randomUUID();
-    const galleryItem: GalleryItem = { ...insertGalleryItem, id };
+    const galleryItem: GalleryItem = { 
+      ...insertGalleryItem, 
+      id,
+      isVisible: insertGalleryItem.isVisible ?? true
+    };
     this.galleryItems.set(id, galleryItem);
     return galleryItem;
   }
 }
 
-export const storage = new MemStorage();
+// Database storage implementation
+export class DatabaseStorage implements IStorage {
+  async getUser(id: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
+    return user;
+  }
+
+  async createInquiry(insertInquiry: InsertInquiry): Promise<Inquiry> {
+    const [inquiry] = await db
+      .insert(inquiries)
+      .values(insertInquiry)
+      .returning();
+    return inquiry;
+  }
+
+  async getInquiries(): Promise<Inquiry[]> {
+    return await db.select().from(inquiries).orderBy(inquiries.createdAt);
+  }
+
+  async getTestimonials(): Promise<Testimonial[]> {
+    return await db
+      .select()
+      .from(testimonials)
+      .where(eq(testimonials.isVisible, true));
+  }
+
+  async createTestimonial(insertTestimonial: InsertTestimonial): Promise<Testimonial> {
+    const [testimonial] = await db
+      .insert(testimonials)
+      .values(insertTestimonial)
+      .returning();
+    return testimonial;
+  }
+
+  async getNotices(): Promise<Notice[]> {
+    return await db
+      .select()
+      .from(notices)
+      .where(eq(notices.isVisible, true));
+  }
+
+  async createNotice(insertNotice: InsertNotice): Promise<Notice> {
+    const [notice] = await db
+      .insert(notices)
+      .values(insertNotice)
+      .returning();
+    return notice;
+  }
+
+  async getGalleryItems(): Promise<GalleryItem[]> {
+    return await db
+      .select()
+      .from(galleryItems)
+      .where(eq(galleryItems.isVisible, true));
+  }
+
+  async createGalleryItem(insertGalleryItem: InsertGalleryItem): Promise<GalleryItem> {
+    const [galleryItem] = await db
+      .insert(galleryItems)
+      .values(insertGalleryItem)
+      .returning();
+    return galleryItem;
+  }
+}
+
+export const storage = new DatabaseStorage();
